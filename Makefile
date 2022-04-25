@@ -8,7 +8,7 @@ setup:
 	touch database/database.sqlite
 	php artisan migrate
 	php artisan db:seed
-	npm ci
+	npm i
 	npm run dev
 
 watch:
@@ -34,6 +34,7 @@ deploy:
 
 lint:
 	composer phpcs
+	composer phpstan
 
 lint-fix:
 	composer phpcbf
