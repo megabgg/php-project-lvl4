@@ -34,7 +34,6 @@ deploy:
 
 lint:
 	composer phpcs
-	composer phpstan
 
 lint-fix:
 	composer phpcbf
