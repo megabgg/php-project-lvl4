@@ -28,7 +28,7 @@ return [
         "array" => "Поле :attribute должен содержать от :min до :max пунктов.",
     ],
     "boolean" => "Поле :attribute должно содержать булевые значения (true, false).",
-    "confirmed" => "Поле :attribute не подходит подтверждению.",
+    "confirmed" => "Пароль и подтверждение не совпадают",
     "date" => "Поле :attribute содержить неправильную дату.",
     "date_format" => "Поле :attribute не соответствует формату :format.",
     "different" => "Поле :attribute и :other должны быть разные.",
