@@ -8,7 +8,7 @@ setup:
 	touch database/database.sqlite
 	php artisan migrate
 	php artisan db:seed
-	npm i
+	npm ci
 	npm run dev
 
 watch:
@@ -38,3 +38,9 @@ lint:
 
 lint-fix:
 	composer phpcbf
+
+clear-cache:
+	php artisan cache:clear
+	php artisan config:clear
+	php artisan route:clear
+	php artisan view:clear
