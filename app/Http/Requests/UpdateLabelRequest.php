@@ -26,7 +26,7 @@ class UpdateLabelRequest extends FormRequest
     {
 
         return [
-            'name' => ['required', Rule::unique('labels')->ignore($this->route('label')->id)],
+            'name' => ['required', Rule::unique('labels')->ignore($this->route('label')->id ?? null)],
             'description' => 'nullable|string'
         ];
     }

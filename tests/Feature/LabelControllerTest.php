@@ -70,6 +70,6 @@ class LabelControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
-        $this->assertDatabaseMissing('labels', ['id' => $label->id]);
+        $this->assertDatabaseMissing('labels', ['id' => $label]);
     }
 }

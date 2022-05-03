@@ -12,9 +12,9 @@ class TaskCreateFormFields
     public function compose(View $view)
     {
         $emptyField = ['' => '----------'];
-        $taskStatuses = $emptyField + TaskStatus::all()->pluck('name', 'id')->toArray();
-        $users = $emptyField + User::all()->pluck('name', 'id')->toArray();
-        $labels = Label::all()->pluck('name', 'id')->toArray();
+        $taskStatuses = $emptyField + TaskStatus::pluck('name', 'id')->toArray();
+        $users = $emptyField + User::pluck('name', 'id')->toArray();
+        $labels = Label::pluck('name', 'id')->toArray();
 
         $view->with('taskStatuses', $taskStatuses);
         $view->with('users', $users);

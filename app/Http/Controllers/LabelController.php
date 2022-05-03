@@ -35,14 +35,14 @@ class LabelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\LabelRequest $request
+     * @param \App\Http\Requests\StoreLabelRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreLabelRequest $request)
     {
         $created = Label::create($request->validated());
 
-        if (!$created) {
+        if ($created->notExists) {
             return back()->withErrors(['error' => __('Fail. Label not created.')])->withInput();
         }
 
@@ -63,7 +63,7 @@ class LabelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\LabelRequest $request
+     * @param \App\Http\Requests\UpdateLabelRequest $request
      * @param \App\Models\Label $label
      * @return \Illuminate\Http\Response
      */

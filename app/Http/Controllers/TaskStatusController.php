@@ -35,30 +35,20 @@ class TaskStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\TaskStatusRequest $request
+     * @param \App\Http\Requests\StoreTaskStatusRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTaskStatusRequest $request)
     {
         $created = TaskStatus::create($request->validated());
 
-        if (!$created) {
+        if ($created->notExists) {
             return back()->withErrors(['error' => __('Fail. Status not created.')])->withInput();
         }
 
         return redirect()->route('task_statuses.index')->with(['success' => __('Status added.')]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\TaskStatus $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TaskStatus $taskStatus)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -74,7 +64,7 @@ class TaskStatusController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\TaskStatusRequest $request
+     * @param \App\Http\Requests\UpdateTaskStatusRequest $request
      * @param \App\Models\TaskStatus $taskStatus
      * @return \Illuminate\Http\Response
      */

@@ -6,7 +6,8 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Task;
-use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -44,7 +45,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\TaskRequest $request
+     * @param \App\Http\Requests\StoreTaskRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTaskRequest $request)
@@ -55,8 +56,7 @@ class TaskController extends Controller
             return $task;
         });
 
-
-        if (!$created) {
+        if ($created->notExists) {
             return back()->withErrors(['error' => __('Fail. Task not created.')])->withInput();
         }
 
@@ -88,7 +88,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\TaskRequest $request
+     * @param \App\Http\Requests\UpdateTaskRequest $request
      * @param \App\Models\Task $task
      * @return \Illuminate\Http\Response
      */
@@ -101,7 +101,7 @@ class TaskController extends Controller
             return $task;
         });
 
-        if (!$updated) {
+        if ($updated->notExists) {
             return back()->withErrors(['error' => __('Failed to update task.')])->withInput();
         }
 

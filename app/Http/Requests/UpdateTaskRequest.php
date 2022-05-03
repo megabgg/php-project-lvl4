@@ -25,7 +25,7 @@ class UpdateTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', Rule::unique('tasks')->ignore($this->route('task')->id)],
+            'name' => ['required', Rule::unique('tasks')->ignore($this->route('task')->id ?? null)],
             'description' => 'nullable|string',
             'status_id' => 'required|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',

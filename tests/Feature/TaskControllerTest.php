@@ -66,7 +66,7 @@ class TaskControllerTest extends TestCase
     {
         $task = Task::factory()->create();
         $response = $this->actingAs($this->user)->delete(route('tasks.auth.destroy', $task));
-        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
+        $this->assertDatabaseMissing('tasks', ['id' => $task]);
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
     }
