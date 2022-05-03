@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskRequest;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
@@ -47,7 +48,7 @@ class TaskController extends Controller
      * @param \App\Http\Requests\TaskRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskRequest $request)
+    public function store(StoreTaskRequest $request)
     {
         $created = DB::transaction(function () use ($request): Task {
             $task = $request->user()->createdTasks()->create($request->only(['name', 'description', 'status_id', 'assigned_to_id']));
@@ -92,7 +93,7 @@ class TaskController extends Controller
      * @param \App\Models\Task $task
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
         $updated = DB::transaction(function () use ($request, $task): Task {
             $task->fill($request->only(['name', 'description', 'status_id', 'assigned_to_id']));

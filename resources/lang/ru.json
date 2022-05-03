@@ -59,5 +59,6 @@
     "Author": "Автор",
     "This is a required field": "Это обязательное поле",
     "A status with the same name already exists": "Статус с таким именем уже существует",
-    "A label with the same name already exists": "Метка с таким именем уже существует"
+    "A label with the same name already exists": "Метка с таким именем уже существует",
+    "A task with the same name already exists": "Задача с таким именем уже существует"
 }
