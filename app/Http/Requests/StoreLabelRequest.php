@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class TaskStatusRequest extends FormRequest
+class StoreLabelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,17 @@ class TaskStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:labels|max:50',
+            'name' => ['required', Rule::unique('labels')],
+            'description' => 'nullable|string'
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => __('This is a required field'),
+            'name.unique' => __('A label with the same name already exists'),
         ];
     }
 }

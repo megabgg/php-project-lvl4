@@ -57,7 +57,7 @@ class TaskController extends Controller
 
 
         if (!$created) {
-            return back()->withErrors(['msg' => __('Fail. Task not created.')])->withInput();
+            return back()->withErrors(['error' => __('Fail. Task not created.')])->withInput();
         }
 
         return redirect()->route('tasks.index')->with(['success' => __('Task added.')]);
@@ -102,7 +102,7 @@ class TaskController extends Controller
         });
 
         if (!$updated) {
-            return back()->withErrors(['msg' => __('Failed to update task.')])->withInput();
+            return back()->withErrors(['error' => __('Failed to update task.')])->withInput();
         }
 
         return redirect()->route('tasks.index')->with(['success' => __('Task updated.')]);

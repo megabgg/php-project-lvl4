@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class LabelRequest extends FormRequest
+
+class UpdateTaskStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +27,15 @@ class LabelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:labels|max:50',
-            'description' => 'max:150',
+            'name' => ['required', Rule::unique('task_statuses')->ignore($this->route('task_status')->id)]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => __('This is a required field'),
+            'name.unique' => __('A status with the same name already exists'),
         ];
     }
 }

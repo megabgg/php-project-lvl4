@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 
-class TaskRequest extends FormRequest
+class StoreTaskStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +27,7 @@ class TaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'nullable|string',
-            'status_id' => 'required|exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|exists:users,id',
-            'labels' => 'array',
+            'name' => ['required', Rule::unique('task_statuses')]
         ];
     }
 
@@ -38,7 +35,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'name.required' => __('This is a required field'),
-            'status_id.required' => __('This is a required field'),
+            'name.unique' => __('A status with the same name already exists'),
         ];
     }
 }

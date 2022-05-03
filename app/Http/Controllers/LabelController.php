@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LabelRequest;
+use App\Http\Requests\StoreLabelRequest;
+use App\Http\Requests\UpdateLabelRequest;
 use App\Models\Label;
 
 class LabelController extends Controller
@@ -37,12 +38,12 @@ class LabelController extends Controller
      * @param \App\Http\Requests\LabelRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LabelRequest $request)
+    public function store(StoreLabelRequest $request)
     {
         $created = Label::create($request->validated());
 
         if (!$created) {
-            return back()->withErrors(['msg' => __('Fail. Label not created.')])->withInput();
+            return back()->withErrors(['error' => __('Fail. Label not created.')])->withInput();
         }
 
         return redirect()->route('labels.index')->with(['success' => __('Label added.')]);
@@ -66,12 +67,12 @@ class LabelController extends Controller
      * @param \App\Models\Label $label
      * @return \Illuminate\Http\Response
      */
-    public function update(LabelRequest $request, Label $label)
+    public function update(UpdateLabelRequest $request, Label $label)
     {
         $updated = $label->update($request->validated());
 
         if (!$updated) {
-            return back()->withErrors(['msg' => __('Failed to update label.')])->withInput();
+            return back()->withErrors(['error' => __('Failed to update label.')])->withInput();
         }
 
         return redirect()->route('labels.index')->with(['success' => __('Label updated.')]);
@@ -86,7 +87,7 @@ class LabelController extends Controller
     public function destroy(Label $label)
     {
         if ($label->task()->exists()) {
-            return redirect()->route('labels.index')->withErrors(['msg' => __('Failed to delete label.')]);
+            return redirect()->route('labels.index')->withErrors(['error' => __('Failed to delete label.')]);
         }
 
         $label->delete();

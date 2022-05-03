@@ -89,8 +89,7 @@
                     {{ session()->get('success')}}
                 </div>
             @endif
-
-            @if ($errors->any())
+            @if ($errors->has('error'))
                 <div class="alert alert-danger" role="alert">
                     @foreach ($errors->all() as $error)
                         <p class="mb-0">{{ $error }}</p>

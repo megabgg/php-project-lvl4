@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskStatusRequest;
+use App\Http\Requests\StoreTaskStatusRequest;
+use App\Http\Requests\UpdateTaskStatusRequest;
 use App\Models\TaskStatus;
 
 class TaskStatusController extends Controller
@@ -37,12 +38,12 @@ class TaskStatusController extends Controller
      * @param \App\Http\Requests\TaskStatusRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskStatusRequest $request)
+    public function store(StoreTaskStatusRequest $request)
     {
         $created = TaskStatus::create($request->validated());
 
         if (!$created) {
-            return back()->withErrors(['msg' => __('Fail. Status not created.')])->withInput();
+            return back()->withErrors(['error' => __('Fail. Status not created.')])->withInput();
         }
 
         return redirect()->route('task_statuses.index')->with(['success' => __('Status added.')]);
@@ -77,12 +78,12 @@ class TaskStatusController extends Controller
      * @param \App\Models\TaskStatus $taskStatus
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskStatusRequest $request, TaskStatus $taskStatus)
+    public function update(UpdateTaskStatusRequest $request, TaskStatus $taskStatus)
     {
         $updated = $taskStatus->update($request->validated());
 
         if (!$updated) {
-            return back()->withErrors(['msg' => __('Failed to update status.')])->withInput();
+            return back()->withErrors(['error' => __('Failed to update status.')])->withInput();
         }
 
         return redirect()->route('task_statuses.index')->with(['success' => __('Status updated.')]);
@@ -97,7 +98,7 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         if ($taskStatus->task()->exists()) {
-            return redirect()->route('task_statuses.index')->withErrors(['msg' => __('Failed to delete status.')]);
+            return redirect()->route('task_statuses.index')->withErrors(['error' => __('Failed to delete status.')]);
         }
         $taskStatus->delete();
         return redirect()->route('task_statuses.index')->with(['success' => __('Status deleted.')]);
