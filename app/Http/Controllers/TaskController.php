@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Task;
+use Illuminate\Support\Collection;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -54,9 +55,9 @@ class TaskController extends Controller
             $task = $request->user()->createdTasks()->create($request->only(['name', 'description', 'status_id', 'assigned_to_id']));
             $task->labels()->sync($request->labels);
             return $task;
-        });
+        })->exists ?? false;
 
-        if ($created->notExists) {
+        if (!$created) {
             return back()->withErrors(['error' => __('Fail. Task not created.')])->withInput();
         }
 
