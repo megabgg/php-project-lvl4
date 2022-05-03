@@ -20,6 +20,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = QueryBuilder::for(Task::class)
+            ->latest()
             ->with('creator', 'assigned', 'status', 'labels')
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),

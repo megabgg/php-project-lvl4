@@ -42,7 +42,7 @@ class LabelController extends Controller
     {
         $created = Label::create($request->validated())->exists ?? false;
 
-        if ($created) {
+        if (!$created) {
             return back()->withErrors(['error' => __('Fail. Label not created.')])->withInput();
         }
 
