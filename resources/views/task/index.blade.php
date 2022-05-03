@@ -20,7 +20,7 @@
                                     'filter[created_by_id]',
                                     $users,
                                     $filter['created_by_id'] ?? '',
-                                    ['class' => 'form-select me-2', 'placeholder' => __('Creator')])
+                                    ['class' => 'form-select me-2', 'placeholder' => __('Author')])
                                 !!}
                 </div>
                 <div class="col">
@@ -53,7 +53,7 @@
             <th>{{  __('ID') }}</th>
             <th>{{  __('Status') }}</th>
             <th>{{  __('Name') }}</th>
-            <th>{{  __('Creator') }}</th>
+            <th>{{  __('Author') }}</th>
             <th>{{  __('Executor') }}</th>
             <th>{{  __('Created date') }}</th>
             @auth
