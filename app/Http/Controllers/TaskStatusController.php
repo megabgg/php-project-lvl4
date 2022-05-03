@@ -40,11 +40,7 @@ class TaskStatusController extends Controller
      */
     public function store(StoreTaskStatusRequest $request)
     {
-        $created = TaskStatus::create($request->validated());
-
-        if ($created->notExists) {
-            return back()->withErrors(['error' => __('Fail. Status not created.')])->withInput();
-        }
+        TaskStatus::create($request->validated());
 
         return redirect()->route('task_statuses.index')->with(['success' => __('Status added.')]);
     }

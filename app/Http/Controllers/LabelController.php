@@ -40,11 +40,7 @@ class LabelController extends Controller
      */
     public function store(StoreLabelRequest $request)
     {
-        $created = Label::create($request->validated())->exists ?? false;
-
-        if (!$created) {
-            return back()->withErrors(['error' => __('Fail. Label not created.')])->withInput();
-        }
+        Label::create($request->validated());
 
         return redirect()->route('labels.index')->with(['success' => __('Label added.')]);
     }

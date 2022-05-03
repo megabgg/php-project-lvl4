@@ -19,6 +19,7 @@ class TaskController extends Controller
      */
     public function index()
     {
+        /** @phpstan-ignore-next-line */
         $tasks = QueryBuilder::for(Task::class)
             ->latest()
             ->with('creator', 'assigned', 'status', 'labels')
@@ -52,15 +53,11 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $created = DB::transaction(function () use ($request): Task {
+        DB::transaction(function () use ($request): Task {
             $task = $request->user()->createdTasks()->create($request->only(['name', 'description', 'status_id', 'assigned_to_id']));
             $task->labels()->sync($request->labels);
             return $task;
-        })->exists ?? false;
-
-        if (!$created) {
-            return back()->withErrors(['error' => __('Fail. Task not created.')])->withInput();
-        }
+        });
 
         return redirect()->route('tasks.index')->with(['success' => __('Task added.')]);
     }
