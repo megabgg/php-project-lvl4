@@ -21,14 +21,14 @@ class Task extends Model
     protected $dates = ['created_at', 'updated_at'];
 
 
-    public function created_by()
+    public function creator()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'created_by_id');
     }
 
-    public function assigned_to()
+    public function assigned()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'assigned_to_id');
     }
 
     public function status()
@@ -38,6 +38,6 @@ class Task extends Model
 
     public function labels()
     {
-        return $this->belongsToMany('App\Models\Label','task_labels');
+        return $this->belongsToMany('App\Models\Label', 'task_labels');
     }
 }

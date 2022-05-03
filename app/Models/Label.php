@@ -19,6 +19,6 @@ class Label extends Model
 
     public function task()
     {
-        return $this->belongsToMany('App\Models\Label','task_labels');
+        return $this->belongsToMany('App\Models\Label', 'task_labels');
     }
 }

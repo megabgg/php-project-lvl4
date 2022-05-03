@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
 
-
 class TaskController extends Controller
 {
     /**
@@ -19,7 +18,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = QueryBuilder::for(Task::class)
-            ->with('created_by', 'assigned_to', 'status', 'labels')
+            ->with('creator', 'assigned', 'status', 'labels')
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
                 AllowedFilter::exact('created_by_id'),

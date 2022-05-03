@@ -6,7 +6,6 @@ use App\Models\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-
 class StoreTaskStatusRequest extends FormRequest
 {
     /**

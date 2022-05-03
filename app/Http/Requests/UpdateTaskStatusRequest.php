@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-
 
 class UpdateTaskStatusRequest extends FormRequest
 {
