@@ -18,6 +18,9 @@ class Task extends Model
 
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
+
     public function created_by()
     {
         return $this->belongsTo('App\Models\User');

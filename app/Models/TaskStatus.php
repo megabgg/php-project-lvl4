@@ -13,6 +13,9 @@ class TaskStatus extends Model
         'name'
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
+
     public function task()
     {
         return $this->hasMany('App\Models\Task', 'status_id');

@@ -14,6 +14,9 @@ class Label extends Model
         'description'
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
+
     public function task()
     {
         return $this->belongsToMany('App\Models\Label','task_labels');

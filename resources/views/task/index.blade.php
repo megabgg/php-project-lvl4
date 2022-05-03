@@ -72,7 +72,7 @@
                 <td><a href="{{ route('tasks.auth.show', $task) }}">{{ $task->name }}</a></td>
                 <td>{{ $task->created_by->name }}</td>
                 <td>{{ $task->assigned_to->name ?? '' }}</td>
-                <td>{{ $task->created_at }}</td>
+                <td>{{ $task->created_at->format('d.m.Y') }}</td>
                 @auth
                     <td>
                         <a class="text-decoration-none" href="{{ route('tasks.auth.edit', $task) }}">
